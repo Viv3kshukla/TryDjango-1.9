@@ -2,7 +2,7 @@ from django.shortcuts import render
 from django.http import HttpResponse
 # Create your views here.
 
-
+from .models import Post
 def posts_home(request):
     title="Home"
     context={
@@ -23,7 +23,10 @@ def posts_detail(request):
 
 def posts_list(request):
     title="ListView"
+    queryset=Post.objects.all()
+
     context = {
+        'object_list':queryset,
         'title':title,
     }
     # if request.user.is_authenticated():
