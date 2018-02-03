@@ -1,16 +1,18 @@
 from django.shortcuts import render,get_object_or_404
-from django.http import HttpResponse
+from django.http import HttpResponse,HttpResponseRedirect
 # Create your views here.
 
 from .models import Post
 from .forms import PostForm
 
 def posts_create(request):
-    form=PostForm(request.POST or None)      # either grab that form data or do nothing
+    form=PostForm(request.POST or None)
     if form.is_valid():
         instance=form.save(commit=False)
-        print(form.cleaned_data)             # printing out form data
+        print(form.cleaned_data)
         instance.save()
+        # message success
+        return HttpResponseRedirect(instance.get_absolute_url())
     context = {
         'form': form,
     }
@@ -18,7 +20,7 @@ def posts_create(request):
 
 def posts_detail(request,id=None):
     title="Detail"
-    # instance = Post.objects.get(id=1)
+
     instance=get_object_or_404(Post,id=id)
     context={
         'title':instance.title,
@@ -35,19 +37,23 @@ def posts_list(request):
         'object_list':queryset,
         'title':title,
     }
-    # if request.user.is_authenticated():
-    #     context = {
-    #         'title':'My User List',
-    #     }
-    # else:
-    #     context = {
-    #         'title':'List'
-    #     }
     return render(request, 'index.html', context)
 
-def posts_update(request):
+def posts_update(request,id=None):
 
-    return HttpResponse("<h1> Hello Update</h1>")
+    instance = get_object_or_404(Post, id=id)
+    form = PostForm(request.POST or None,instance=instance)
+    if form.is_valid():
+        instance = form.save(commit=False)
+        # message success
+        instance.save()
+        return HttpResponseRedirect(instance.get_absolute_url())
+    context = {
+        'title': instance.title,
+        'instance': instance,
+        'form':form,
+    }
+    return render(request, 'post_form.html', context)
 
 def posts_delete(request):
 
