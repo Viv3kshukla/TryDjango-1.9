@@ -4,20 +4,37 @@ from django.http import HttpResponse
 
 
 def posts_home(request):
-
-    return render(request,'index.html',{})
+    title="Home"
+    context={
+        'title':title,
+    }
+    return render(request,'index.html',context)
 
 def posts_create(request):
-
-    return HttpResponse("<h1> Hello Create</h1>")
+    title = "Create"
+    context = {
+        'title': title,
+    }
+    return render(request, 'index.html', context)
 
 def posts_detail(request):
 
     return HttpResponse("<h1> Hello Detail</h1>")
 
 def posts_list(request):
-
-    return HttpResponse("<h1> Hello List</h1>")
+    title="ListView"
+    context = {
+        'title':title,
+    }
+    # if request.user.is_authenticated():
+    #     context = {
+    #         'title':'My User List',
+    #     }
+    # else:
+    #     context = {
+    #         'title':'List'
+    #     }
+    return render(request, 'index.html', context)
 
 def posts_update(request):
 
