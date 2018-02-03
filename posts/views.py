@@ -1,4 +1,4 @@
-from django.shortcuts import render,get_object_or_404
+from django.shortcuts import render,get_object_or_404,redirect
 from django.http import HttpResponse,HttpResponseRedirect
 from django.contrib import messages
 # Create your views here.
@@ -15,8 +15,7 @@ def posts_create(request):
         # message success
         messages.success(request,"successfully created")
         return HttpResponseRedirect(instance.get_absolute_url())
-    else:
-        messages.error(request,"not successfully created")
+
     context = {
         'form': form,
     }
@@ -41,7 +40,7 @@ def posts_list(request):
         'object_list':queryset,
         'title':title,
     }
-    return render(request, 'index.html', context)
+    return render(request, 'posts_list.html', context)
 
 def posts_update(request,id=None):
 
@@ -62,6 +61,8 @@ def posts_update(request,id=None):
     }
     return render(request, 'post_form.html', context)
 
-def posts_delete(request):
-
-    return HttpResponse("<h1> Hello Delete</h1>")
+def posts_delete(request,id=None):
+    instance = get_object_or_404(Post, id=id)
+    instance.delete()
+    messages.success(request, "successfully deleted")
+    return redirect("posts:list")

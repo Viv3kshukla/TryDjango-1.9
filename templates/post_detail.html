@@ -1,18 +1,18 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>TryDjango</title>
-</head>
-<body>
+{% extends 'base.html' %}
+
+{% block head_title %}{{ instance.title }} | {{ block.super }}{% endblock head_title %}
+
+<style>
+{% block style %}
+    h1{
+        color:red;
+    }
+{% endblock %}
+</style>
+
+{% block content %}
     <h1> We are in {{ title }}</h1>
-    {% if messages %}
-        <ul class="messages">
-            {% for message in messages %}
-                <li {% if message.tags %} class="{{ message.tags }}" {% endif %}>{{ message }}</li>
-            {% endfor %}
-        </ul>
-    {% endif %}
+
 
         <a href="/posts/{{ instance.id }}">{{ instance.title }}</a><br>
         {{ instance.content }}<br>
@@ -20,5 +20,4 @@
         {{ instance.updated.year }}<br>
         {{ instance.id }}<br>
 
-</body>
-</html>
+{% endblock content %}
