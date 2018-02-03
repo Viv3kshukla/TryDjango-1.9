@@ -7,7 +7,8 @@
 <body>
     <h1> We are in {{ title }} templates!</h1>
     {% for obj in object_list %}
-        {{ obj.title }}<br>
+    <!--    <a href="/posts/{{ obj.id }}">{{ obj.title }}</a><br>                      -->
+        <a href="{% url 'posts:detail' id=obj.id %}">{{ obj.title }}</a><br>
         {{ obj.content }}<br>
         {{ obj.timestamp.year }}<br>
         {{ obj.updated.year }}<br>

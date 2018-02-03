@@ -3,12 +3,6 @@ from django.http import HttpResponse
 # Create your views here.
 
 from .models import Post
-def posts_home(request):
-    title="Home"
-    context={
-        'title':title,
-    }
-    return render(request,'index.html',context)
 
 def posts_create(request):
     title = "Create"

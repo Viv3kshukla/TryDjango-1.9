@@ -6,7 +6,8 @@
 </head>
 <body>
     <h1> We are in {{ title }}</h1>
-        {{ instance.title }}<br>
+
+        <a href="/posts/{{ instance.id }}">{{ instance.title }}</a><br>
         {{ instance.content }}<br>
         {{ instance.timestamp.year }}<br>
         {{ instance.updated.year }}<br>
