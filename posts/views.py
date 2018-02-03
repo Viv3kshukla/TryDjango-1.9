@@ -3,13 +3,18 @@ from django.http import HttpResponse
 # Create your views here.
 
 from .models import Post
+from .forms import PostForm
 
 def posts_create(request):
-    title = "Create"
+    form=PostForm(request.POST or None)      # either grab that form data or do nothing
+    if form.is_valid():
+        instance=form.save(commit=False)
+        print(form.cleaned_data)             # printing out form data
+        instance.save()
     context = {
-        'title': title,
+        'form': form,
     }
-    return render(request, 'index.html', context)
+    return render(request, 'post_form.html', context)
 
 def posts_detail(request,id=None):
     title="Detail"
