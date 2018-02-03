@@ -17,10 +17,10 @@ def posts_create(request):
     }
     return render(request, 'index.html', context)
 
-def posts_detail(request):
+def posts_detail(request,id=None):
     title="Detail"
     # instance = Post.objects.get(id=1)
-    instance=get_object_or_404(Post,id=1)
+    instance=get_object_or_404(Post,id=id)
     context={
         'title':instance.title,
         'instance':instance,
