@@ -4,20 +4,18 @@
 
 <style>
 {% block style %}
-    h1{
-        color:red;
-    }
+
 {% endblock %}
 </style>
 
 {% block content %}
-    <h1> We are in {{ title }}</h1>
+
+    <div class="col-sm-6 col-sm-offset-3"></div>
+        <h1>{{ title }} <small> {{ instance.timestamp }}</small></h1>
 
 
         <a href="/posts/{{ instance.id }}">{{ instance.title }}</a><br>
-        {{ instance.content }}<br>
-        {{ instance.timestamp.year }}<br>
-        {{ instance.updated.year }}<br>
-        {{ instance.id }}<br>
+        {{ instance.content|linebreaks }}<br>                   <!-- template filter for linebreaks (in built) -->
+        <br>
 
 {% endblock content %}

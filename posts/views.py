@@ -51,7 +51,6 @@ def posts_update(request,id=None):
         instance.save()
         # success message
         messages.success(request, "successfully saved")
-        messages.success(request, "successfully edited")
         return HttpResponseRedirect(instance.get_absolute_url())
 
     context = {
