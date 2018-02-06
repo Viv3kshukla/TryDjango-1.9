@@ -16,7 +16,7 @@
                 <img src="{{ instance.image.url }}" class="img-responsive">
             {% endif %}
             <div class="caption">
-                <h3><a href="{% url 'posts:detail' id=instance.id %}">{{ instance.title }}</a> <small> {{ instance.timestamp|timesince }} ago </small> </h3>
+                <h3><a href="{{ instance.get_absolute_url }}">{{ instance.title }}</a> <small> {{ instance.timestamp|timesince }} ago </small> </h3>
                 <p> {{ instance.content|linebreaks }} </p>
             </div>
         </div>
