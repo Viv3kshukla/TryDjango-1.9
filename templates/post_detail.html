@@ -17,6 +17,9 @@
             {% endif %}
             <div class="caption">
                 <h3><a href="{{ instance.get_absolute_url }}">{{ instance.title }}</a> <small> {{ instance.timestamp|timesince }} ago </small> </h3>
+                {% if instance.user.get_full_name %}
+                    <p> Author : {{ instance.user.get_full_name }} </p>
+                {% endif %}
                 <p> {{ instance.content|linebreaks }} </p>
             </div>
         </div>
